@@ -1,0 +1,99 @@
+html {
+    height: 100%;
+}
+
+html body {
+    background-image: url(https://raw.githubusercontent.com/geoffroy-luchez/Pokedex-CSS/main/images/fond.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+}
+
+.main-font {
+    font-family: "Press Start 2P", cursive;
+}
+
+.container h1 {
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+.container h1:hover {
+    color: black;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul > li {
+    transition: all 0.3s ease-in-out;
+}
+
+ul > li:hover {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+}
+
+#list-results {
+    max-height: 547px;
+    min-width: 35%;
+    background-color: white;
+    border-radius: 20px;
+    border: 20px solid black;
+    overflow: auto;
+}
+
+.details {
+    max-width: 35%;
+    background-color: white;
+    border-radius: 20px;
+    border: 20px solid black;
+}
+
+.sprite-container > img {
+    background-color: rgba(0, 0, 0, 0.438);
+    border-radius: 50%;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* number of lines to show */
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.results-wrapper {
+    background-color: red;
+    border-radius: 20px;
+    min-height: 300px;
+    /* max-height: 650px; */
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.nav-icons > i:hover {
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-icons > i:hover {
+    color: white;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}

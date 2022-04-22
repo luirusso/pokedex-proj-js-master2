@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokédex</title>
+        <!-- BOOTSTRAP -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
+        <!-- GOOGLE FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <!-- FONT AWESOME -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous"
+        />
+        <!-- CSS -->
+        <link rel="stylesheet" href="/style.css" />
+    </head>
+    <body>
+        <header class="pt-5 pb-4">
+            <div
+                class="container d-flex align-items-center justify-content-between"
+            >
+                <a class="text-decoration-none" href=""
+                    ><h1 class="main-font">Pokédex</h1></a
+                >
+
+                <select
+                    class="form-select h-100 w-25 mx-2 main-font"
+                    name="pages"
+                    id="pages"
+                >
+                    <option value="1">Pag 1</option>
+                    <option value="2">Pag 2</option>
+                    <option value="3">Pag 3</option>
+                    <option value="4">Pag 4</option>
+                </select>
+
+                <input
+                    id="search-bar"
+                    class="main-font form-control h-100 mx-2"
+                    type="text"
+                    placeholder="Cerca un Pokémon!"
+                />
+                <button type="button" class="search btn btn-dark main-font">
+                    Cerca
+                </button>
+            </div>
+        </header>
+
+        <main class="py-5 d-none">
+            <div
+                class="results-wrapper container d-flex align-items-center justify-content-evenly p-4 h-75"
+            >
+                <div class="h-100">
+                    <ul id="list-results" class="p-5 h-100">
+                        <!-- <li>
+                            
+                        </li> -->
+                    </ul>
+                    <div
+                        class="nav-icons py-3 d-flex justify-content-around align-items-center"
+                    >
+                        <i
+                            class="disabled pointer end fs-2 fa-solid fa-angles-left"
+                        ></i>
+                        <i
+                            class="disabled pointer prev fs-2 fa-solid fa-arrow-left"
+                        ></i>
+
+                        <span class="page-display"></span>
+
+                        <i
+                            class="pointer next fs-2 fa-solid fa-arrow-right"
+                        ></i>
+                        <i
+                            class="pointer start fs-2 fa-solid fa-angles-right"
+                        ></i>
+                    </div>
+                    <div class="text-center">
+                        <div class="pb-3">
+                            N° di Pokémon da mostrare per pagina (max. 20)
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <input
+                                type="text"
+                                placeholder="Inserire un numero da 1 a 20"
+                                id="limit-input"
+                                class="form-control w-25 me-2"
+                            />
+                            <button id="input-limit-btn" class="btn btn-dark">
+                                Invio
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="details align-self-start d-none p-5 h-100">
+                    <div class="detail h-100">
+                        <!-- <h4>Nome</h4>
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="">
+                        <div>
+                            <h5>Informazioni aggiuntive:</h5>
+                            <div>Specie:</div>
+                            <div>Altezza:</div>
+                            <div>Peso:</div>
+                            <div>Mosse:</div>
+                            <div>Evoluzioni:</div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ICONS SCRIPT -->
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+        <!-- SCRIPTS -->
+        <script src="/script.js"></script>
+    </body>
+</html>
