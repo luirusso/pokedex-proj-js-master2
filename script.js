@@ -7,8 +7,9 @@ const main = document.querySelector("main");
 const searchBtn = document.querySelector(".search");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
-const lastPage = document.querySelector(".end");
-const firstPage = document.querySelector(".start");
+let lastPageBtn = document.querySelector(".end");
+let lastPage = 0;
+let firstPageBtn = document.querySelector(".start");
 let limitInput = document.getElementById("limit-input");
 let limitInputBtn = document.getElementById("input-limit-btn");
 
@@ -19,12 +20,15 @@ let totalPages = 0;
 let currentPage = 1;
 let limit = 10;
 let offset = 0;
+let count = 0;
 
 searchInput.addEventListener("input", startSearch);
 searchBtn.addEventListener("click", buttonSearch);
 limitInputBtn.addEventListener("click", inputLimitSearch);
 
 next.addEventListener("click", nextPage);
+lastPageBtn.addEventListener("click", goToLastPage);
+firstPageBtn.addEventListener("click", goToFirstPage);
 prev.addEventListener("click", prevPage);
 
 displayPages();
@@ -32,15 +36,13 @@ displayPages();
 function inputLimitSearch() {
     val = getLimitVal();
 
+    limit = +val;
+
     let text = getVal();
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open(
-        "GET",
-        `https://pokeapi.co/api/v2/pokemon?limit=${val}`,
-        true
-    );
+    xhr.open("GET", `https://pokeapi.co/api/v2/pokemon?limit=${val}`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {
@@ -71,6 +73,8 @@ function inputLimitSearch() {
 
     xhr.send();
 
+    displayPages();
+
     main.classList.remove("d-none");
 }
 
@@ -79,7 +83,7 @@ function displayPages() {
 
     xhr.open(
         "GET",
-        "https://pokeapi.co/api/v2/pokemon?limit=100000000000",
+        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=100000000000`,
         true
     );
 
@@ -90,7 +94,7 @@ function displayPages() {
             // let totalPages = Math.trunc(obj.count / 10 + 1);
             // console.log(totalPages);
 
-            setPagination(10);
+            setPagination(limit);
 
             pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
         } else {
@@ -103,7 +107,6 @@ function displayPages() {
 
 function setPagination(limit) {
     limit = getLimitVal();
-    console.log(getLimitVal());
 
     totalPages = Math.trunc(obj.count / limit + 1);
 
@@ -172,7 +175,7 @@ function showDetail(url) {
         if (this.status === 200) {
             obj = JSON.parse(this.responseText);
 
-            showEvolution(obj.id);
+            // showEvolution(obj.id);
 
             detailsContainer.innerHTML = `
                         <div class="d-flex flex-column align-items-center">
@@ -230,40 +233,40 @@ function showMoves(url) {
     xhr.send();
 }
 
-function showEvolution(pokeid) {
-    const xhr = new XMLHttpRequest();
+// function showEvolution(pokeid) {
+//     const xhr = new XMLHttpRequest();
 
-    xhr.open(
-        "GET",
-        `https://pokeapi.co/api/v2/evolution-chain/${pokeid}/`,
-        true
-    );
+//     xhr.open(
+//         "GET",
+//         `https://pokeapi.co/api/v2/evolution-chain/${pokeid}/`,
+//         true
+//     );
 
-    xhr.onload = function () {
-        if (this.status === 200) {
-            obj = JSON.parse(this.responseText);
-            // console.log(obj.chain.evolves_to[0].species.name);
+//     xhr.onload = function () {
+//         if (this.status === 200) {
+//             obj = JSON.parse(this.responseText);
+//             // console.log(obj.chain.evolves_to[0].species.name);
 
-            let evolutions = [];
+//             let evolutions = [];
 
-            evolutions.push(obj.chain.evolves_to[0].species.name);
+//             evolutions.push(obj.chain.evolves_to[0].species.name);
 
-            // console.log(obj.chain.evolves_to[0].evolves_to[0].species.name)
+//             // console.log(obj.chain.evolves_to[0].evolves_to[0].species.name)
 
-            evolutions.push(obj.chain.evolves_to[0].evolves_to[0].species.name);
+//             evolutions.push(obj.chain.evolves_to[0].evolves_to[0].species.name);
 
-            // console.log(evolutions)
+//             // console.log(evolutions)
 
-            detailsContainer.innerHTML += `
-                        <div class="pb-2 text-capitalize"><strong>Evoluzioni:</strong> ${evolutions} </div>
-            `;
-        } else {
-            console.log("Nessun file trovato");
-        }
-    };
+//             detailsContainer.innerHTML += `
+//                         <div class="pb-2 text-capitalize"><strong>Evoluzioni:</strong> ${evolutions} </div>
+//             `;
+//         } else {
+//             console.log("Nessun file trovato");
+//         }
+//     };
 
-    xhr.send();
-}
+//     xhr.send();
+// }
 
 function buttonSearch() {
     let text = getVal();
@@ -403,6 +406,112 @@ function prevPage() {
     main.classList.remove("d-none");
 }
 
+function goToLastPage() {
+    lastPage = totalPages;
+    currentPage = lastPage;
+    let _offset = obj.count - (obj.count % limit);
+
+    let text = getVal();
+
+    const xhr = new XMLHttpRequest();
+
+    if (text.length >= 3 || text.length == 0) {
+        xhr.open(
+            "GET",
+            `https://pokeapi.co/api/v2/pokemon?offset=${_offset}&limit=${limit}`,
+            true
+        );
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                obj = JSON.parse(this.responseText);
+
+                pokeApi = obj.next;
+
+                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                           <hr>
+                `;
+
+                let pokemons = obj.results.filter((pokemon) => {
+                    if (pokemon.name.includes(text)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                for (pokemon of pokemons) {
+                    res += `<li id="${pokemon.name}" class="poke-list pb-2 text-capitalize" url="${pokemon.url}"><span class="iconify me-1 pokeicon" data-icon="mdi:pokeball"></span> ${pokemon.name}</li>`;
+                }
+                resultsContainer.innerHTML = res;
+                setListeners(pokemons);
+            } else {
+                console.log("Nessun file trovato");
+            }
+        };
+
+        xhr.send();
+
+        displayPages();
+
+        checkBtnsDisabled(obj)
+
+        main.classList.remove("d-none");
+    }
+}
+
+function goToFirstPage() {
+    lastPage = totalPages;
+    currentPage = lastPage;
+    let _offset = obj.count - (obj.count % limit);
+
+    let text = getVal();
+
+    const xhr = new XMLHttpRequest();
+
+    if (text.length >= 3 || text.length == 0) {
+        xhr.open(
+            "GET",
+            `https://pokeapi.co/api/v2/pokemon?offset=${_offset}&limit=${limit}`,
+            true
+        );
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                obj = JSON.parse(this.responseText);
+
+                pokeApi = obj.next;
+
+                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                           <hr>
+                `;
+
+                let pokemons = obj.results.filter((pokemon) => {
+                    if (pokemon.name.includes(text)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                for (pokemon of pokemons) {
+                    res += `<li id="${pokemon.name}" class="poke-list pb-2 text-capitalize" url="${pokemon.url}"><span class="iconify me-1 pokeicon" data-icon="mdi:pokeball"></span> ${pokemon.name}</li>`;
+                }
+                resultsContainer.innerHTML = res;
+                setListeners(pokemons);
+            } else {
+                console.log("Nessun file trovato");
+            }
+        };
+
+        xhr.send();
+
+        displayPages();
+
+        checkBtnsDisabled(obj)
+
+        main.classList.remove("d-none");
+    }
+}
+
 function checkBtnsDisabled(obj) {
     const { next: n, previous: p } = obj;
     if (p) {
@@ -417,7 +526,15 @@ function checkBtnsDisabled(obj) {
         next.classList.remove("disabled");
     } else {
         next.classList.add("disabled");
+        lastPageBtn.classList.add("disabled");
         prev.classList.remove("disabled");
+    }
+
+    if(currentPage == lastPage) {
+        next.classList.add("disabled");
+        lastPageBtn.classList.add("disabled");
+        prev.classList.remove("disabled");
+        firstPageBtn.classList.remove("disabled");
     }
 }
 
@@ -426,15 +543,11 @@ function getVal() {
 }
 
 function getLimitVal() {
-    console.log(document.getElementById("limit-input").value);
-
     if (document.getElementById("limit-input").value == 0) {
-         return document.getElementById("limit-input").value = 10;
+        return (document.getElementById("limit-input").value = limit);
     } else {
         return document.getElementById("limit-input").value;
     }
-
-    return document.getElementById("limit-input").value;
 }
 
 function setListeners(pokemons) {
