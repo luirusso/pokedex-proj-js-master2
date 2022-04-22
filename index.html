@@ -37,21 +37,9 @@
                 <a class="text-decoration-none" href=""
                     ><h1 class="main-font">Pokédex</h1></a
                 >
-
-                <select
-                    class="form-select h-100 w-25 mx-2 main-font"
-                    name="pages"
-                    id="pages"
-                >
-                    <option value="1">Pag 1</option>
-                    <option value="2">Pag 2</option>
-                    <option value="3">Pag 3</option>
-                    <option value="4">Pag 4</option>
-                </select>
-
                 <input
                     id="search-bar"
-                    class="main-font form-control h-100 mx-2"
+                    class="main-font form-control h-100 w-50 mx-2"
                     type="text"
                     placeholder="Cerca un Pokémon!"
                 />
@@ -95,6 +83,16 @@
                             N° di Pokémon da mostrare per pagina
                         </div>
                         <div class="d-flex justify-content-center">
+                            <select
+                                class="form-select h-100 w-25 mx-2"
+                                name="pages"
+                                id="page-select"
+                            >
+                                <option value="1">Pag 1</option>
+                                <option value="2">Pag 2</option>
+                                <option value="3">Pag 3</option>
+                                <option value="4">Pag 4</option>
+                            </select>
                             <input
                                 type="text"
                                 placeholder="Inserire un numero da 1 a 20"
@@ -124,7 +122,7 @@
             </div>
         </main>
 
-        <!-- ICONS SCRIPT -->
+        <!-- ICONIFY SCRIPT -->
         <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
         <!-- SCRIPTS -->
         <script src="/script.js"></script>

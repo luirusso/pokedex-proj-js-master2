@@ -12,6 +12,7 @@ let lastPage = 0;
 let firstPageBtn = document.querySelector(".start");
 let limitInput = document.getElementById("limit-input");
 let limitInputBtn = document.getElementById("input-limit-btn");
+let pageSelect = document.getElementById("page-select");
 
 let pokeApi = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 let apiObj = { prev: null, next: pokeApi };
@@ -31,6 +32,8 @@ next.addEventListener("click", nextPage);
 lastPageBtn.addEventListener("click", goToLastPage);
 firstPageBtn.addEventListener("click", goToFirstPage);
 prev.addEventListener("click", prevPage);
+
+
 
 displayPages();
 
@@ -371,7 +374,6 @@ function prevPage() {
 
             checkBtnsDisabled(obj, false);
 
-            currentPage--;
 
             // if (obj.previous != null) {
             //     prev.classList.remove("disabled");
@@ -403,6 +405,9 @@ function prevPage() {
     };
 
     xhr.send();
+
+    currentPage--;
+
 
     main.classList.remove("d-none");
 }
@@ -539,13 +544,14 @@ function checkBtnsDisabled(obj) {
         firstPageBtn.classList.remove("disabled");
     }
 
-    if(currentPage == firstPageOffset) {
+    if(currentPage == 0 || currentPage == 1) {
         next.classList.remove("disabled");
         lastPageBtn.classList.remove("disabled");
-        prev.classList.add("disabled");
-        firstPageBtn.classList.add("disabled");
-
-
+        prev.classList.remove("disabled");
+        firstPageBtn.classList.remove("disabled");
+    } else {
+        prev.classList.remove("disabled");
+        firstPageBtn.classList.remove("disabled");
     }
 }
 
