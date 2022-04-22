@@ -21,6 +21,7 @@ let currentPage = 1;
 let limit = 10;
 let offset = 0;
 let count = 0;
+let firstPageOffset = 0;
 
 searchInput.addEventListener("input", startSearch);
 searchBtn.addEventListener("click", buttonSearch);
@@ -460,9 +461,8 @@ function goToLastPage() {
 }
 
 function goToFirstPage() {
-    lastPage = totalPages;
-    currentPage = lastPage;
-    let _offset = obj.count - (obj.count % limit);
+    firstPageOffset = obj.count - obj.count;
+    currentPage = firstPageOffset;
 
     let text = getVal();
 
@@ -471,7 +471,7 @@ function goToFirstPage() {
     if (text.length >= 3 || text.length == 0) {
         xhr.open(
             "GET",
-            `https://pokeapi.co/api/v2/pokemon?offset=${_offset}&limit=${limit}`,
+            `https://pokeapi.co/api/v2/pokemon?offset=${firstPageOffset}&limit=${limit}`,
             true
         );
 
@@ -508,6 +508,8 @@ function goToFirstPage() {
 
         checkBtnsDisabled(obj)
 
+        currentPage++
+
         main.classList.remove("d-none");
     }
 }
@@ -535,6 +537,15 @@ function checkBtnsDisabled(obj) {
         lastPageBtn.classList.add("disabled");
         prev.classList.remove("disabled");
         firstPageBtn.classList.remove("disabled");
+    }
+
+    if(currentPage == firstPageOffset) {
+        next.classList.remove("disabled");
+        lastPageBtn.classList.remove("disabled");
+        prev.classList.add("disabled");
+        firstPageBtn.classList.add("disabled");
+
+
     }
 }
 
