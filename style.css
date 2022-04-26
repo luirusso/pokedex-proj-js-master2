@@ -36,29 +36,31 @@ ul > li {
 
 ul > li:hover {
     cursor: pointer;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border-radius: 5px;
 }
 
 #list-results {
     max-height: 547px;
     min-width: 35%;
-    background-color: white;
+    background-color: black;
+    color: white;
     border-radius: 20px;
-    border: 20px solid black;
+    border: 20px solid white;
     overflow: auto;
 }
 
 .details {
     max-width: 35%;
-    background-color: white;
+    background-color: black;
+    color: white;
     border-radius: 20px;
-    border: 20px solid black;
+    border: 20px solid white;
 }
 
 .sprite-container > img {
-    background-color: rgba(0, 0, 0, 0.438);
+    background-color: rgba(128, 128, 128, 0.425);
     border-radius: 50%;
 }
 
@@ -72,7 +74,7 @@ ul > li:hover {
 }
 
 .results-wrapper {
-    background: red;
+    background: rgb(197, 28, 28);
     border-radius: 20px;
     min-height: 300px;
     /* max-height: 650px; */
