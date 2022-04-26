@@ -13,6 +13,7 @@ let firstPageBtn = document.querySelector(".start");
 let limitInput = document.getElementById("limit-input");
 let limitInputBtn = document.getElementById("input-limit-btn");
 let pageSelect = document.getElementById("page-select");
+let pageSelectOptions = [];
 
 let pokeApi = "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10";
 let apiObj = { prev: null, next: pokeApi };
@@ -32,8 +33,6 @@ next.addEventListener("click", nextPage);
 lastPageBtn.addEventListener("click", goToLastPage);
 firstPageBtn.addEventListener("click", goToFirstPage);
 prev.addEventListener("click", prevPage);
-
-
 
 displayPages();
 
@@ -82,9 +81,76 @@ function inputLimitSearch() {
     main.classList.remove("d-none");
 }
 
-function displayPages() {
+pageSelect.addEventListener("change", goToPageSelect);
+
+function goToPageSelect() {
+    
+}
+
+function setPagination(limit) {
+    limit = getLimitVal();
+
+    totalPages = Math.trunc(obj.count / limit + 1);
+
+    if (totalPages % limit === 0) {
+        totalPages = Math.trunc(obj.count / limit);
+    } else {
+        totalPages = Math.trunc(obj.count / limit + 1);
+    }
+
+    pokeApi = `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=${limit}`;
+
+    return totalPages;
+}
+
+function startSearch() {
+    let text = getVal();
+
     const xhr = new XMLHttpRequest();
 
+    if (text.length >= 3 || text.length == 0) {
+        xhr.open(
+            "GET",
+            "https://pokeapi.co/api/v2/pokemon?limit=100000000000",
+            true
+        );
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                obj = JSON.parse(this.responseText);
+
+                pokeApi = obj.next;
+
+                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                           <hr>
+                `;
+
+                let pokemons = obj.results.filter((pokemon) => {
+                    if (pokemon.name.includes(text)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                for (pokemon of pokemons) {
+                    res += `<li id="${pokemon.name}" class="poke-list pb-2 text-capitalize" url="${pokemon.url}"><span class="iconify me-1 pokeicon" data-icon="mdi:pokeball"></span> ${pokemon.name}</li>`;
+                }
+                resultsContainer.innerHTML = res;
+                setListeners(pokemons);
+            } else {
+                console.log("Nessun file trovato");
+            }
+        };
+
+        xhr.send();
+
+        main.classList.remove("d-none");
+    }
+}
+
+function displayPages() {
+    const xhr = new XMLHttpRequest();
+    console.log(offset);
     xhr.open(
         "GET",
         `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=100000000000`,
@@ -102,21 +168,34 @@ function displayPages() {
 
             pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
 
-            console.log(totalPages)
+            console.log(totalPages);
 
-            pageSelect.innerHTML = '';
+            pageSelect.innerHTML = "";
+            pageSelectOptions = [];
 
             for (i = 0; i < totalPages; i++) {
-                pageSelect.innerHTML += `
-                <option value="page-${i + 1}">Pag ${i + 1}</option>
-                `
+                // pageSelect.innerHTML += `
+                // <option value="page-${i + 1}">Pag ${i + 1}</option>
+                // `;
+
+                pageSelectOptions.push(i + 1)
             }
+
+            pageSelectOptions.forEach((e) => {
+                pageSelect.innerHTML += `
+                <option value="page-${e}">Pag ${e}</option>
+                `;
+            })
+
         } else {
             console.log("Nessun file trovato");
         }
     };
 
     xhr.send();
+
+    console.log("return", offset);
+    return offset;
 }
 
 function setPagination(limit) {
@@ -384,7 +463,6 @@ function prevPage() {
 
             checkBtnsDisabled(obj, false);
 
-
             // if (obj.previous != null) {
             //     prev.classList.remove("disabled");
             //     pokeApi = obj.previous;
@@ -417,7 +495,6 @@ function prevPage() {
     xhr.send();
 
     currentPage--;
-
 
     main.classList.remove("d-none");
 }
@@ -469,7 +546,7 @@ function goToLastPage() {
 
         displayPages();
 
-        checkBtnsDisabled(obj)
+        checkBtnsDisabled(obj);
 
         main.classList.remove("d-none");
     }
@@ -521,9 +598,9 @@ function goToFirstPage() {
 
         displayPages();
 
-        checkBtnsDisabled(obj)
+        checkBtnsDisabled(obj);
 
-        currentPage++
+        currentPage++;
 
         main.classList.remove("d-none");
     }
@@ -547,14 +624,14 @@ function checkBtnsDisabled(obj) {
         prev.classList.remove("disabled");
     }
 
-    if(currentPage == lastPage) {
+    if (currentPage == lastPage) {
         next.classList.add("disabled");
         lastPageBtn.classList.add("disabled");
         prev.classList.remove("disabled");
         firstPageBtn.classList.remove("disabled");
     }
 
-    if(currentPage == 0 || currentPage == 1) {
+    if (currentPage == 0 || currentPage == 1) {
         next.classList.remove("disabled");
         lastPageBtn.classList.remove("disabled");
         prev.classList.remove("disabled");
