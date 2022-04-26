@@ -398,7 +398,6 @@ function showTypes(url) {
             let types = [];
 
             obj.types.forEach((type) => {
-                console.log(type.type.name);
                 types.push(type.type.name)
             });
 
