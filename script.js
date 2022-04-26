@@ -81,7 +81,6 @@ function inputLimitSearch() {
 
     displaySelectOptions();
 
-
     main.classList.remove("d-none");
 }
 
@@ -354,6 +353,13 @@ function showDetail(url) {
 
             // showEvolution(obj.id);
 
+            /**
+             * <div class="pb-2 text-capitalize"><strong>Tipo:</strong> ${obj.types[0].type.name}/${obj.types[1].type.name}</div>
+             * 
+             * <div class="pb-2 text-capitalize"><strong>Tipo:</strong> ${obj.types[0].length > 0 ? `${obj.types[0].type.name}/${obj.types[1].type.name}` : `${obj.types[0].type.name}`}</div>
+                            <div class="pb-2 text-capitalize"><strong>Specie:</strong> ${obj.species.name}</div>
+             */
+
             detailsContainer.innerHTML = `
                         <div class="d-flex flex-column align-items-center">
                             <h3 class="pb-2 text-capitalize">${obj.name}</h3>
@@ -363,8 +369,9 @@ function showDetail(url) {
                         </div>
                         <hr>
                         <div>
-                            <h4 class="pb-2">Informazioni aggiuntive</h4>
-                            <div class="pb-2 text-capitalize"><strong>Specie:</strong> ${obj.species.name}</div>
+                            <h4 class="py-2">Informazioni aggiuntive</h4>
+                            <hr>
+                            <div class="pb-2 text-capitalize"><strong>ID Pokémon:</strong> ${obj.id}</div>
                             <div class="pb-2"><strong>Altezza:</strong> ${obj.height}</div>
                             <div class="pb-2"><strong>Peso:</strong> ${obj.weight}</div>
                         </div>
@@ -377,6 +384,38 @@ function showDetail(url) {
     xhr.send();
 
     details.classList.remove("d-none");
+}
+
+function showTypes(url) {
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("GET", url, true);
+
+    xhr.onload = function () {
+        if (this.status === 200) {
+            obj = JSON.parse(this.responseText);
+
+            let types = [];
+
+            obj.types.forEach((type) => {
+                console.log(type.type.name);
+                types.push(type.type.name)
+            });
+
+            detailsContainer.innerHTML += `
+                <div class="types pb-2 text-capitalize">
+                    <strong>
+                        Tipo:
+                    </strong>
+                    ${types}
+                </div>
+            `;
+        } else {
+            console.log("Nessun file trovato");
+        }
+    };
+
+    xhr.send();
 }
 
 function showMoves(url) {
@@ -629,7 +668,7 @@ function goToLastPage() {
         xhr.send();
 
         offset = _offset;
-        console.log(offset)
+        console.log(offset);
 
         displayPages();
 
@@ -750,6 +789,8 @@ function setListeners(pokemons) {
         element.addEventListener("click", (e) => {
             showDetail(e.target.getAttribute("url"));
             showMoves(e.target.getAttribute("url"));
+            showTypes(e.target.getAttribute("url"));
+
             // showEvolution(e.target.getAttribute("pokeid"));
         });
     }
