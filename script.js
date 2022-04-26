@@ -79,6 +79,9 @@ function inputLimitSearch() {
 
     displayPages();
 
+    displaySelectOptions();
+
+
     main.classList.remove("d-none");
 }
 
