@@ -535,10 +535,10 @@ function nextPage() {
 
             displayPages();
 
-            checkBtnsDisabled(obj, false);
-
+            
             currentPage++;
-
+            
+            checkBtnsDisabled(obj, false);
             // if (obj.next != null) {
             //     next.classList.remove("disabled");
             //     pokeApi = obj.next;
