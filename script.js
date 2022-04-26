@@ -54,7 +54,7 @@ function inputLimitSearch() {
 
             pokeApi = obj.next;
 
-            let res = `<h3 class="pb-3">Risultati ricerca</h3>
+            let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -111,7 +111,7 @@ function goToPageSelect() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -180,7 +180,7 @@ function startSearch() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -315,7 +315,7 @@ function startSearch() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -369,7 +369,7 @@ function showDetail(url) {
                         </div>
                         <hr>
                         <div>
-                            <h4 class="py-2">Informazioni aggiuntive</h4>
+                            <h4 class="py-2 text-center">Informazioni aggiuntive</h4>
                             <hr>
                             <div class="pb-2 text-capitalize"><strong>ID Pokémon:</strong> ${obj.id}</div>
                             <div class="pb-2"><strong>Altezza:</strong> ${obj.height}</div>
@@ -433,7 +433,7 @@ function showMoves(url) {
             });
 
             detailsContainer.innerHTML += `
-                <div class="moves ellipsis text-capitalize">
+                <div class="moves mb-2 ellipsis text-capitalize">
                     <strong>
                         Elenco mosse:
                     </strong>
@@ -497,7 +497,7 @@ function buttonSearch() {
                 apiObj.next = obj.next;
                 apiObj.prev = obj.previous;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -546,7 +546,7 @@ function nextPage() {
             //     next.classList.add("disabled");
             // }
 
-            let res = `<h3 class="pb-3">Risultati ricerca</h3>
+            let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -593,7 +593,7 @@ function prevPage() {
             // }
             // console.log(obj.previous);
 
-            let res = `<h3 class="pb-3">Risultati ricerca</h3>
+            let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -643,7 +643,7 @@ function goToLastPage() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -698,7 +698,7 @@ function goToFirstPage() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
                            <hr>
                 `;
 
@@ -787,8 +787,8 @@ function setListeners(pokemons) {
         let element = document.getElementById(pokemon.name);
         element.addEventListener("click", (e) => {
             showDetail(e.target.getAttribute("url"));
-            showMoves(e.target.getAttribute("url"));
             showTypes(e.target.getAttribute("url"));
+            showMoves(e.target.getAttribute("url"));
 
             // showEvolution(e.target.getAttribute("pokeid"));
         });
