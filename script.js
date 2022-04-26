@@ -628,6 +628,9 @@ function goToLastPage() {
 
         xhr.send();
 
+        offset = _offset;
+        console.log(offset)
+
         displayPages();
 
         checkBtnsDisabled(obj);
@@ -713,6 +716,9 @@ function checkBtnsDisabled(obj) {
         lastPageBtn.classList.add("disabled");
         prev.classList.remove("disabled");
         firstPageBtn.classList.remove("disabled");
+    } else {
+        next.classList.remove("disabled");
+        lastPageBtn.classList.remove("disabled");
     }
 
     if (currentPage == 0 || currentPage == 1) {
