@@ -101,6 +101,14 @@ function displayPages() {
             setPagination(limit);
 
             pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
+
+            console.log(totalPages)
+
+            for (i = 0; i < totalPages; i++) {
+                pageSelect.innerHTML += `
+                <option value="page-${i + 1}">Pag ${i + 1}</option>
+                `
+            }
         } else {
             console.log("Nessun file trovato");
         }
