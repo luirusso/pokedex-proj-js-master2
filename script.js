@@ -35,7 +35,7 @@ lastPageBtn.addEventListener("click", goToLastPage);
 firstPageBtn.addEventListener("click", goToFirstPage);
 prev.addEventListener("click", prevPage);
 
-displayPages();
+// displayPages();
 
 function inputLimitSearch() {
     val = getLimitVal();
@@ -77,7 +77,7 @@ function inputLimitSearch() {
 
     xhr.send();
 
-    displayPages();
+    // displayPages();
 
     displaySelectOptions();
 
@@ -134,13 +134,14 @@ function goToPageSelect() {
 
         xhr.send();
 
+        currentPage++;
+
         displayPages();
 
         setPagination(limit);
 
         checkBtnsDisabled(obj);
 
-        currentPage++;
 
         main.classList.remove("d-none");
     }
@@ -254,6 +255,13 @@ function displaySelectOptions() {
 }
 
 function displayPages() {
+    
+    setPagination(limit);
+
+    pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
+
+    return;
+
     const xhr = new XMLHttpRequest();
     xhr.open(
         "GET",
@@ -277,8 +285,6 @@ function displayPages() {
     };
 
     xhr.send();
-
-    return offset;
 }
 
 function setPagination(limit) {
@@ -533,10 +539,9 @@ function nextPage() {
         if (this.status === 200) {
             obj = JSON.parse(this.responseText);
 
-            displayPages();
-
-            
             currentPage++;
+
+            displayPages();
             
             checkBtnsDisabled(obj, false);
             // if (obj.next != null) {
@@ -679,7 +684,7 @@ function goToLastPage() {
 
 function goToFirstPage() {
     firstPageOffset = obj.count - obj.count;
-    currentPage = firstPageOffset;
+    currentPage = 1;
 
     let text = getVal();
 
@@ -721,11 +726,13 @@ function goToFirstPage() {
 
         xhr.send();
 
+        currentPage = 1;
         displayPages();
+
+        offset = 0;
 
         checkBtnsDisabled(obj);
 
-        currentPage++;
 
         main.classList.remove("d-none");
     }
