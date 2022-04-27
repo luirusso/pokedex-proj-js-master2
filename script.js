@@ -427,7 +427,10 @@ function showDetail(url) {
 
     xhr.send();
 
+    setPagination(limit);
+
     details.classList.remove("d-none");
+
 }
 
 // function showTypes(url) {
@@ -667,7 +670,6 @@ function prevPage() {
 
 function goToLastPage() {
     // lastPage = totalPages;
-    currentPage = lastPage;
     let _offset = obj.count - (obj.count % limit);
 
     let text = getVal();
@@ -713,11 +715,17 @@ function goToLastPage() {
         offset = _offset;
         // console.log(offset);
 
+        currentPage = lastPage;
+
         displayPages();
 
         checkBtnsDisabled(obj);
 
+
         main.classList.remove("d-none");
+
+        console.log(offset)
+
     }
 }
 
