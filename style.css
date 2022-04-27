@@ -57,6 +57,8 @@ ul > li:hover {
     color: white;
     border-radius: 20px;
     border: 20px solid white;
+    overflow-y: auto;
+    height: 670px;
 }
 
 .sprite-container > img {

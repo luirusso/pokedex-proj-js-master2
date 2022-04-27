@@ -39,7 +39,7 @@
                 >
                 <input
                     id="search-bar"
-                    class="main-font form-control h-100 w-50 mx-2"
+                    class="main-font form-control w-50 mx-2"
                     type="text"
                     placeholder="Cerca un Pokémon!"
                 />
@@ -53,59 +53,66 @@
             <div
                 class="results-wrapper container d-flex align-items-center justify-content-evenly p-4 h-75"
             >
-                <div class="h-100">
+                <div class="h-100 d-flex flex-column align-self-start justify-content-between">
                     <ul id="list-results" class="p-5 mb-2 h-100">
                         <!-- <li>
                             
                         </li> -->
                     </ul>
-                    <div
-                        class="nav-icons py-3 d-flex justify-content-around align-items-center"
-                    >
-                        <i
-                            class="disabled pointer start fs-2 fa-solid fa-angles-left"
-                        ></i>
-                        <i
-                            class="disabled pointer prev fs-2 fa-solid fa-arrow-left"
-                        ></i>
+                    <div class="nav-wrapper">
+                        <div
+                            class="nav-icons py-3 d-flex justify-content-around align-items-center"
+                        >
+                            <i
+                                class="disabled pointer start fs-2 fa-solid fa-angles-left"
+                            ></i>
+                            <i
+                                class="disabled pointer prev fs-2 fa-solid fa-arrow-left"
+                            ></i>
 
-                        <span class="page-display fw-bold"></span>
+                            <span class="page-display fw-bold"></span>
 
-                        <i
-                            class="pointer next fs-2 fa-solid fa-arrow-right"
-                        ></i>
-                        <i
-                            class="pointer end fs-2 fa-solid fa-angles-right"
-                        ></i>
-                    </div>
-                    <div class="text-center">
-                        <div class="pb-3 fw-bold">
-                            N° di Pokémon da mostrare per pagina
+                            <i
+                                class="pointer next fs-2 fa-solid fa-arrow-right"
+                            ></i>
+                            <i
+                                class="pointer end fs-2 fa-solid fa-angles-right"
+                            ></i>
                         </div>
-                        <div class="d-flex justify-content-center align-items-center">
-                            <select
-                                class="form-select h-100 w-50 mx-2"
-                                name="pages"
-                                id="page-select"
+                        <div class="text-center">
+                            <div class="pb-3 fw-bold">
+                                N° di Pokémon da mostrare per pagina
+                            </div>
+                            <div
+                                class="d-flex justify-content-center align-items-center"
                             >
-                                <!-- <option value="1">Pag 1</option>
+                                <select
+                                    class="form-select h-100 w-50 mx-2"
+                                    name="pages"
+                                    id="page-select"
+                                >
+                                    <!-- <option value="1">Pag 1</option>
                                 <option value="2">Pag 2</option>
                                 <option value="3">Pag 3</option>
                                 <option value="4">Pag 4</option> -->
-                            </select>
-                            <input
-                                type="text"
-                                placeholder="Inserire un numero da 1 a 20"
-                                id="limit-input"
-                                class="form-control w-25 me-2"
-                            />
-                            <button id="input-limit-btn" class="btn btn-primary">
-                                Invio
-                            </button>
+                                </select>
+                                <input
+                                    type="text"
+                                    placeholder="Inserire un numero da 1 a 20"
+                                    id="limit-input"
+                                    class="form-control w-25 me-2"
+                                />
+                                <button
+                                    id="input-limit-btn"
+                                    class="btn btn-primary"
+                                >
+                                    Invio
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="details align-self-start d-none p-5 h-100">
+                <div class="details align-self-start d-none p-5">
                     <div class="detail h-100">
                         <!-- <h4>Nome</h4>
                         <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="">
