@@ -229,7 +229,7 @@ function displaySelectOptions() {
 
             setPagination(limit);
 
-            pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
+            displayPages();
 
             pageSelect.innerHTML = "";
             pageSelectOptions = [];
@@ -408,30 +408,48 @@ function showDetail(url) {
                 </div>
             `;
 
-            let moves = [];
+            if (!obj.moves.length == 0) {
+                let moves = [];
+                obj.moves.forEach((el) => {
+                    moves.push(el.move.name);
+                });
 
-            obj.moves.forEach((el) => {
-                moves.push(el.move.name);
-            });
+                detailsContainer.innerHTML += `
+                <div class="moves-wrapper p-2">
+                    <div class="mb-3 badge rounded-pill bg-primary">
+                        <strong>
+                            Elenco mosse:
+                        </strong>
+                    </div>
+                    <ol class="moves mb-2 ellipsis text-capitalize overflow-auto">
 
-            detailsContainer.innerHTML += `
-            <div class="moves-wrapper p-2">
-                <div class="mb-3 badge rounded-pill bg-primary">
-                    <strong>
-                        Elenco mosse:
-                    </strong>
+                    </ol>
                 </div>
-                <ol class="moves mb-2 ellipsis text-capitalize overflow-auto">
+                `;
 
-                </ol>
-            </div>
-            `;
-
-            moves.forEach((move) => {
-                document.querySelector(".moves").innerHTML += `
+                moves.forEach((move) => {
+                    document.querySelector(".moves").innerHTML += `
                     <li class="pb-2">${move}</li>
-                `
-            })
+                `;
+                });
+            } else {
+                detailsContainer.innerHTML += `
+                <div class="moves-wrapper p-2">
+                    <div class="mb-3 badge rounded-pill bg-primary">
+                        <strong>
+                            Elenco mosse:
+                        </strong>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <div class="mb-3 text-center">
+                            <strong>
+                                Nessuna mossa trovata
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }
         } else {
             console.log("Nessun file trovato");
         }
@@ -439,10 +457,11 @@ function showDetail(url) {
 
     xhr.send();
 
+    displaySelectOptions();
+
     setPagination(limit);
 
     details.classList.remove("d-none");
-
 }
 
 // function showTypes(url) {
@@ -733,11 +752,9 @@ function goToLastPage() {
 
         checkBtnsDisabled(obj);
 
-
         main.classList.remove("d-none");
 
-        console.log(offset)
-
+        console.log(offset);
     }
 }
 
