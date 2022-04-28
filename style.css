@@ -42,9 +42,9 @@ ul > li:hover {
 }
 
 #list-results {
-    max-height: 547px;
+    /* height: 500px; */
     min-width: 35%;
-    background-color: black;
+    background-color: rgb(27, 27, 27);
     color: white;
     border-radius: 20px;
     border: 20px solid white;
@@ -53,12 +53,12 @@ ul > li:hover {
 
 .details {
     /* max-width: 35%; */
-    background-color: black;
+    background-color: rgb(27, 27, 27);
     color: white;
     border-radius: 20px;
     border: 20px solid white;
     overflow-y: auto;
-    height: 670px;
+    height: 640px;
 }
 
 .sprite-container > img {
@@ -70,6 +70,10 @@ ul > li:hover {
 .moves-wrapper {
     background-color: rgb(39, 39, 39);
     border-radius: 10px;
+}
+
+.moves {
+    height: 200px;
 }
 
 .moves > li {
@@ -110,4 +114,8 @@ ul > li:hover {
 .disabled {
     opacity: 0.4;
     pointer-events: none;
+}
+
+.h-640 {
+    height: 640px;
 }

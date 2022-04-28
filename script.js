@@ -314,7 +314,7 @@ function startSearch() {
 
     const xhr = new XMLHttpRequest();
 
-    if (text.length >= 3 || text.length == 0) {
+    if (text.length >= 3) {
         xhr.open(
             "GET",
             "https://pokeapi.co/api/v2/pokemon?limit=100000000000",
@@ -352,7 +352,50 @@ function startSearch() {
 
         main.classList.remove("d-none");
 
-        // nav.classList.add("d-none");
+        nav.classList.add("d-none");
+        resultsContainer.classList.add("h-640");
+    } else if (text.length == 0) {
+        xhr.open(
+            "GET",
+            "https://pokeapi.co/api/v2/pokemon?limit=100000000000",
+            true
+        );
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                obj = JSON.parse(this.responseText);
+
+                pokeApi = obj.next;
+
+                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
+                           <hr>
+                `;
+
+                let pokemons = obj.results.filter((pokemon) => {
+                    if (pokemon.name.includes(text)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                for (pokemon of pokemons) {
+                    res += `<li id="${pokemon.name}" class="poke-list pb-2 text-capitalize" url="${pokemon.url}"><span class="iconify me-1 pokeicon" data-icon="mdi:pokeball"></span> ${pokemon.name}</li>`;
+                }
+                resultsContainer.innerHTML = res;
+                setListeners(pokemons);
+            } else {
+                console.log("Nessun file trovato");
+            }
+        };
+
+        xhr.send();
+
+        main.classList.remove("d-none");
+
+        nav.classList.remove("d-none");
+
+        // resultsContainer.classList.remove("h-640");
+
     }
 }
 
@@ -421,7 +464,7 @@ function showDetail(url) {
                             Elenco mosse:
                         </strong>
                     </div>
-                    <ol class="moves mb-2 ellipsis text-capitalize overflow-auto">
+                    <ol class="moves mb-2 text-capitalize overflow-auto">
 
                     </ol>
                 </div>
@@ -599,6 +642,8 @@ function buttonSearch() {
         xhr.send();
 
         main.classList.remove("d-none");
+
+        nav.classList.remove("d-none");
     }
 }
 
