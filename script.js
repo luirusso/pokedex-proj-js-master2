@@ -385,9 +385,9 @@ function showDetail(url) {
                         <div>
                             <h4 class="py-2 text-center">Informazioni aggiuntive</h4>
                             <hr>
-                            <div class="pb-2 text-capitalize"><strong>ID Pokémon:</strong> ${obj.id}</div>
-                            <div class="pb-2"><strong>Altezza:</strong> ${obj.height}</div>
-                            <div class="pb-2"><strong>Peso:</strong> ${obj.weight}</div>
+                            <div class="pb-2 text-capitalize"><span class="badge rounded-pill bg-light text-dark"><strong>ID Pokémon:</strong></span> ${obj.id}</div>
+                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Altezza:</strong></span> ${obj.height}</div>
+                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Peso:</strong></span> ${obj.weight}</div>
                         </div>
             `;
 
@@ -398,10 +398,12 @@ function showDetail(url) {
             });
 
             detailsContainer.innerHTML += `
-                <div class="types pb-2 text-capitalize">
-                    <strong>
-                        Tipo:
-                    </strong>
+                <div class="types pb-3 text-capitalize">
+                    <span class="badge rounded-pill bg-light text-dark">
+                        <strong>
+                            Tipo:
+                        </strong>
+                    </span>
                     ${types}
                 </div>
             `;
@@ -413,13 +415,23 @@ function showDetail(url) {
             });
 
             detailsContainer.innerHTML += `
-                <div class="moves mb-2 ellipsis text-capitalize">
+            <div class="moves-wrapper p-2">
+                <div class="mb-3 badge rounded-pill bg-primary">
                     <strong>
                         Elenco mosse:
                     </strong>
-                    <div>${moves}</div>
                 </div>
+                <ol class="moves mb-2 ellipsis text-capitalize overflow-auto">
+
+                </ol>
+            </div>
             `;
+
+            moves.forEach((move) => {
+                document.querySelector(".moves").innerHTML += `
+                    <li class="pb-2">${move}</li>
+                `
+            })
         } else {
             console.log("Nessun file trovato");
         }

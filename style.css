@@ -52,7 +52,7 @@ ul > li:hover {
 }
 
 .details {
-    max-width: 35%;
+    /* max-width: 35%; */
     background-color: black;
     color: white;
     border-radius: 20px;
@@ -65,6 +65,15 @@ ul > li:hover {
     background-color: rgba(128, 128, 128, 0.425);
     border-radius: 50%;
     width: 120%;
+}
+
+.moves-wrapper {
+    background-color: rgb(39, 39, 39);
+    border-radius: 10px;
+}
+
+.moves > li {
+    font-size: 0.9rem;
 }
 
 .ellipsis {
