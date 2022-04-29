@@ -357,7 +357,7 @@ function startSearch() {
     } else if (text.length == 0) {
         xhr.open(
             "GET",
-            "https://pokeapi.co/api/v2/pokemon?limit=100000000000",
+            `https://pokeapi.co/api/v2/pokemon?limit=${limit}`,
             true
         );
 
