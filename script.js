@@ -263,7 +263,7 @@ function displaySelectOptions() {
 function displayPages() {
     setPagination(limit);
 
-    pageDisplay.innerHTML = `Pagina ${currentPage} di ${totalPages}`;
+    pageDisplay.innerHTML = `Page ${currentPage} of ${totalPages}`;
 
     return;
 
@@ -329,7 +329,7 @@ function startSearch() {
 
                 pokeApi = obj.next;
 
-                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Search results</h3>
                            <hr>
                 `;
 
@@ -424,11 +424,11 @@ function showDetail(url) {
                             <h3 class="pb-3 text-capitalize">${obj.name}</h3>
                             <div class="sprite-container p-2 text-center d-flex justify-content-between align-items-center">
                                 <div class="pe-2">
-                                    <h6>Fronte</h6>
+                                    <h6>Front</h6>
                                     <img class="sprite" src="${obj.sprites.front_default}" alt="${obj.name}">
                                 </div>
                                 <div>
-                                    <h6>Retro</h6>
+                                    <h6>Back</h6>
 
                                     <img class="sprite" src="${obj.sprites.back_default}" alt="${obj.name}">
                                 </div>
@@ -436,11 +436,11 @@ function showDetail(url) {
                         </div>
                         <hr>
                         <div>
-                            <h4 class="py-2 text-center">Informazioni aggiuntive</h4>
+                            <h4 class="py-2 text-center">Additional Information</h4>
                             <hr>
-                            <div class="pb-2 text-capitalize"><span class="badge rounded-pill bg-light text-dark"><strong>ID Pokémon:</strong></span> #${obj.id}</div>
-                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Altezza:</strong></span> ${obj.height}</div>
-                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Peso:</strong></span> ${obj.weight}</div>
+                            <div class="pb-2 text-capitalize"><span class="badge rounded-pill bg-light text-dark"><strong>Pokémon ID:</strong></span> #${obj.id}</div>
+                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Height:</strong></span> ${obj.height}</div>
+                            <div class="pb-2"><span class="badge rounded-pill bg-light text-dark"><strong>Weight:</strong></span> ${obj.weight}</div>
                         </div>
             `;
 
@@ -454,7 +454,7 @@ function showDetail(url) {
                 <div class="types pb-3 text-capitalize">
                     <span class="badge rounded-pill bg-light text-dark">
                         <strong>
-                            Tipo:
+                            Type:
                         </strong>
                     </span>
                     ${types}
@@ -471,7 +471,7 @@ function showDetail(url) {
                 <div class="moves-wrapper p-2">
                     <div class="mb-3 badge rounded-pill bg-primary">
                         <strong>
-                            Elenco mosse:
+                            Moves:
                         </strong>
                     </div>
                     <ol class="moves mb-2 text-capitalize overflow-auto">
@@ -490,13 +490,13 @@ function showDetail(url) {
                 <div class="moves-wrapper p-2">
                     <div class="mb-3 badge rounded-pill bg-primary">
                         <strong>
-                            Elenco mosse:
+                            Moves:
                         </strong>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                         <div class="mb-3 text-center">
                             <strong>
-                                Nessuna mossa trovata
+                                No moves found
                             </strong>
                         </div>
                     </div>
@@ -628,7 +628,7 @@ function buttonSearch() {
                 apiObj.next = obj.next;
                 apiObj.prev = obj.previous;
 
-                let res = `<h3 class="pb-3 text-center">Risultati ricerca</h3>
+                let res = `<h3 class="pb-3 text-center">Search results</h3>
                            <hr>
                 `;
 
