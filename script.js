@@ -145,6 +145,8 @@ function goToPageSelect() {
         setPagination(limit);
         displayPages();
 
+        offset = _offset;
+
         main.classList.remove("d-none");
     }
 }
@@ -419,9 +421,17 @@ function showDetail(url) {
 
             detailsContainer.innerHTML = `
                         <div class="d-flex flex-column align-items-center">
-                            <h3 class="pb-2 text-capitalize">${obj.name}</h3>
-                            <div class="sprite-container pb-3">
-                                <img class="sprite" src="${obj.sprites.front_default}" alt="${obj.name}">
+                            <h3 class="pb-3 text-capitalize">${obj.name}</h3>
+                            <div class="sprite-container p-2 text-center d-flex justify-content-between align-items-center">
+                                <div class="pe-2">
+                                    <h6>Fronte</h6>
+                                    <img class="sprite" src="${obj.sprites.front_default}" alt="${obj.name}">
+                                </div>
+                                <div>
+                                    <h6>Retro</h6>
+
+                                    <img class="sprite" src="${obj.sprites.back_default}" alt="${obj.name}">
+                                </div>
                             </div>
                         </div>
                         <hr>
@@ -648,9 +658,11 @@ function buttonSearch() {
 }
 
 function nextPage() {
+    offset = parseInt(offset) + limit;
+
     const xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `${getApiUrl(true)}`, true);
+    xhr.open("GET", `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`, true);
 
     xhr.onload = function () {
         if (this.status === 200) {

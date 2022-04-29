@@ -61,10 +61,10 @@ ul > li:hover {
     height: 640px;
 }
 
-.sprite-container > img {
+.sprite-container {
     background-color: rgba(128, 128, 128, 0.425);
-    border-radius: 50%;
-    width: 120%;
+    border-radius: 20px;
+    /* width: 120%; */
 }
 
 .moves-wrapper {
